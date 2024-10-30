@@ -29,8 +29,8 @@
                     <tr>
                         <td>1</td>
                         <td>Conexión a la base de datos con la cuenta usuario y tratamiento de errores</td>
-                        <td><a href="codigoPHP/ejercicio00.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
-                        <td><a href="mostrarcodigo/muestraEjercicio00.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
+                        <td><a><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                     </tr>                    
                 </tbody>
             </table>           
