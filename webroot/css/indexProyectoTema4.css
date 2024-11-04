@@ -72,6 +72,14 @@ td:nth-child(3) {
 td:nth-child(4) {
     width: 4%;
 }
+
+td:nth-child(5) {
+    width: 4%;
+}
+
+td:nth-child(6) {
+    width: 4%;
+}
 /*footer*/
 
 footer{

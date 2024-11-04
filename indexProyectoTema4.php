@@ -22,15 +22,25 @@
                 <thead>
                     <th>nº</th>
                     <th>Enunciado</th>
-                    <th>Ejecutar</th>
-                    <th>Mostrar</th>
+                    <th colspan="2">PDO</th>
+                    <th colspan="2">MYSQLI</th>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
                         <td>Conexión a la base de datos con la cuenta usuario y tratamiento de errores</td>
-                        <td><a><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
-                        <td><a><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
+                        <td><a href="codigoPHP/ejercicio01PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio01PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
+                        <td><a href="codigoPHP/ejercicio01MYSQLI.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio01MYSQLI.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Mostrar el contenido de la tabla Departamento y el número de registros</td>
+                        <td><a href="codigoPHP/ejercicio02PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio02PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
+                        <td><a href="codigoPHP/ejercicio02MYSQLI.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio02MYSQLI.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                     </tr>                    
                 </tbody>
             </table>           
