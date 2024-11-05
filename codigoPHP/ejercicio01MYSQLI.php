@@ -23,8 +23,8 @@
         </main>
         <footer>
             <p><a href="../../index.html">Alex Asensio Sanchez</a></p>
-            <p><a href="../indexProyectoTema3.php">Tema 3</a></p>
-            <p><a target="blank" href="https://github.com/AlexAnacardo/204DWESProyectoTema3/tree/developer">GitHub del repositorio</a></p>
+            <p><a href="../indexProyectoTema4.php">Tema 4</a></p>
+            <p><a target="blank" href="https://github.com/AlexAnacardo/204DWESProyectoTema4/tree/developer">GitHub del repositorio</a></p>
         </footer>
     </body>
 </html>

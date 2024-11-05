@@ -2,33 +2,38 @@
 <html lang="es">
     <head>
         <title>Ej 01</title>
-        <link rel="stylesheet" href="../webroot/css/ejercicio21.css">
+        <link rel="stylesheet" href="../webroot/css/ejercicio01PDO.css">
     </head>
-    <body>
+    <body>        
+        <header>
+            <h1>Conexion a la DB</h1>
+        </header>
         <main>
-            <header>
-                <h1>Mostrar contenido</h1>
-            </header>
             <h2>Conexion exitosa</h2>
             <?php
             
+            //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
             require_once('../config/confDB.php');
             
             try{
-                $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA); //Establecemos la conexion                
-                $attributes = array(
+                //Establecemos la conexion usando las variables globales
+                $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA);           
+                
+                //Declaramos el array con los atributos de la conexion
+                $aAtributos = array(
                 "AUTOCOMMIT", "ERRMODE", "CASE", "CLIENT_VERSION", "CONNECTION_STATUS",
                 "ORACLE_NULLS", "PERSISTENT", "SERVER_INFO", "SERVER_VERSION",
                 );
                 
-                foreach($attributes as $valor){
+                foreach($aAtributos as $valor){
                     echo("$valor: ".$miDB->getAttribute(constant("PDO::ATTR_$valor"))."<br>");
                 }
                 
                 unset($miDB);
                 
-            } catch (Error | Exception $ex) {
-                echo("<b>Error inesperado:</b> ".$ex);
+            } catch (PDOException $ex) {
+                echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
+                echo("<b>Codigo de error:</b> ".$ex->getCode());
             }
                 
             ?>
@@ -43,15 +48,16 @@
                 unset($miDB);
                 
             } catch (PDOException $ex) {
-                echo("<b>Error inesperado:</b> ".$ex->getMessage());
+                echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
+                echo("<b>Codigo de error:</b> ".$ex->getCode());                
             }
                 
             ?>
         </main>
         <footer>
             <p><a href="../../index.html">Alex Asensio Sanchez</a></p>
-            <p><a href="../indexProyectoTema3.php">Tema 3</a></p>
-            <p><a target="blank" href="https://github.com/AlexAnacardo/204DWESProyectoTema3/tree/developer">GitHub del repositorio</a></p>
+            <p><a href="../indexProyectoTema4.php">Tema 4</a></p>
+            <p><a target="blank" href="https://github.com/AlexAnacardo/204DWESProyectoTema4/tree/developer">GitHub del repositorio</a></p>
         </footer>
     </body>
 </html>
