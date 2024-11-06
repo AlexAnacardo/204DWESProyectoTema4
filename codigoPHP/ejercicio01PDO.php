@@ -13,7 +13,7 @@
             <?php
             
             //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
-            require_once('../config/confDB.php');
+            require_once('../config/confDBPDO.php');
             
             try{
                 //Establecemos la conexion usando las variables globales

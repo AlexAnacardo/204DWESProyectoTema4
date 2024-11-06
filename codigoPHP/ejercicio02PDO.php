@@ -13,9 +13,12 @@
             
             //Usar fetch object
             
-            try{
+            try{                
+                //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
+                require_once('../config/confDBPDO.php');
+                
                 //Establecemos la conexion
-                $miDB=new PDO('mysql:host=daw204.isauces.local;port=3306;dbname=DB204DWESProyectoTema4', 'user204DWESProyectoTema4','paso');                 
+                $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA);                
                 
                 //Lanzamos un query de consulta y lo guardamos en una variable
                 $resultadoConsulta= $miDB->query('select * from T02_Departamento');                                               
@@ -37,16 +40,15 @@
                 while ($oDepartamento=$resultadoConsulta->fetchObject()){
                     ?>
                     <tr>
-                        <?php
-                        //Recorremos el objeto mostrando el nombre del campo y su valor
-                        foreach ($oDepartamento as $clave => $valor) {                            
-                            if($clave=='T02FechaCreacionDepartamento' or $clave=='T02FechaBajaDepartamento'){
-                                echo "<td>".date_format(new DateTime($valor), "d/m/Y")."</td>";
-                            }
-                            else{
-                                echo "<td>$valor</td>";
-                            }
-                        }
+                        <?php                        
+                        
+                        $oFechaBaja=$oDepartamento->T02_FechaBajaDepartamento;
+                        
+                        echo "<td>".$oDepartamento->T02_CodDepartamento."</td>";
+                        echo "<td>".$oDepartamento->T02_DescDepartamento."</td>";
+                        echo "<td>".date_format(new DateTime($oDepartamento->T02_FechaCreacionDepartamento), "d/m/Y")."</td>";
+                        echo "<td>".$oDepartamento->T02_VolumenDeNegocio."</td>";
+                        echo is_null($oFechaBaja) ? '<td></td>' : "<td>".date_format(new DateTime($oFechaBaja), "d/m/Y")."</td>";
                         ?>
                     </tr>
                     <?php                                        
