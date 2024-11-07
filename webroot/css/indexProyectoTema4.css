@@ -61,6 +61,10 @@ td {
     padding: 0.3%;
 }
 
+td:nth-child(1) {
+    width: 3%;
+}
+
 td:nth-child(2) {
     width: 60%;
 }

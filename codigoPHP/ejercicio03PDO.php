@@ -43,14 +43,14 @@
                     define('OBLIGATORIO', 1);
 
                     if(isset($_REQUEST['enviar'])){
-
+                        
                             $aErrores=[                            
                                 'codigo' => validacionFormularios::comprobarAlfabetico($_REQUEST['codigo'], MAX_CADENA, MIN_CADENA, OBLIGATORIO),                                                       
-                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], MAX_CADENA, MIN_CADENA, OBLIGATORIO),                            
+                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], MAX_CADENA, 1000, OBLIGATORIO),                            
                                 'volumen'=> validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, MIN_FLOAT, OBLIGATORIO),                            
                             ];   
-
-                         //Recorremos el array de errores 
+                        
+                        //Recorremos el array de errores 
                         foreach ($aErrores as $clave => $valor) {
                             if ($valor == !null) {
                                 $entradaOK = false;
@@ -75,12 +75,12 @@
                         $insercion->bindParam(2, $sDescripcion);
                         $insercion->bindParam(3, new DateTime("now"));
                         $insercion->bindParam(4, $fVolumen);
-                        $insercion->bindParam(null);
+                        $insercion->bindParam(5, null);
 
                         $insercion->execute();
 
 
-                    }
+                    }                    
 
                         ?>
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                  
@@ -109,7 +109,7 @@
                                     <?php } ?>
                                 </div>
                                 <div id="divEnviar">
-                                   <input type="submit" value="hola">
+                                   <input type="submit" value="Enviar">
                                 </div>                                
                             </form>
                         <?php
