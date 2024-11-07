@@ -5,8 +5,8 @@
 
 use DB204DWESProyectoTema4;
 
-insert into T02_Departamento values('ABC', 'descripcion', now(), 1000, null),
-('DEF', 'descripcion', now(), 2500, null),
-('GHI', 'descripcion', now(), 1000, null),
-('JKL', 'descripcion', now(), 3000.6, null),
-('MNO', 'descripcion', now(), 12000, null);
+insert into T02_Departamento values('PES', 'Pescaderia', now(), 100.34, null),
+('CHA', 'Charcuteria', now(), 2500.46, null),
+('MAR', 'Marketing', now(), 12.56, null),
+('LIM', 'Limpieza', now(), 3000.6, null),
+('VER', 'Verduleria', '2024-07-19 12:00:00', 12000.56, '2024-11-02 14:00:00');
