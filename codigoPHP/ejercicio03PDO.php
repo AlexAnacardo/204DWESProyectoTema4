@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <title>Ej 03</title>        
-        <link rel="stylesheet" href="../webroot/css/ejercicio02PDO.css">            
+        <link rel="stylesheet" href="../webroot/css/ejercicio03PDO.css">            
     </head>
     <body>
         <main>
@@ -46,7 +46,7 @@
                         
                             $aErrores=[                            
                                 'codigo' => validacionFormularios::comprobarAlfabetico($_REQUEST['codigo'], MAX_CADENA, MIN_CADENA, OBLIGATORIO),                                                       
-                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], MAX_CADENA, 1000, OBLIGATORIO),                            
+                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], 1000, MIN_CADENA, OBLIGATORIO),                                
                                 'volumen'=> validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, MIN_FLOAT, OBLIGATORIO),                            
                             ];   
                         
@@ -67,15 +67,16 @@
                         $sCodigo=$_REQUEST['codigo'];                    
                         $sDescripcion=$_REQUEST['descripcion'];
                         $fVolumen=$_REQUEST['descripcion'];
-
-
+                        $sFecha= date_format(new DateTime("now"), "Y-M-D H:M:M");
+                        $oNull=null;
+                        
                         $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
 
                         $insercion->bindParam(1, $sCodigo);
                         $insercion->bindParam(2, $sDescripcion);
-                        $insercion->bindParam(3, new DateTime("now"));
+                        $insercion->bindParam(3, $oFecha);
                         $insercion->bindParam(4, $fVolumen);
-                        $insercion->bindParam(5, null);
+                        $insercion->bindParam(5, $oNull);
 
                         $insercion->execute();
 
@@ -86,7 +87,7 @@
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                  
                                 <div id="divCodigo">
                                     <label for="codigo">Codigo departamento: </label>
-                                    <input type="text" name="codigo" id="codigo">
+                                    <input type="text" name="codigo" id="codigo" value="<?php echo (isset($_REQUEST['codigo']) ? $_REQUEST['codigo'] : ''); ?>">
                                     <?php if (!empty($aErrores["codigo"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["codigo"]; ?></p>
@@ -102,14 +103,14 @@
                                 </div>
                                 <div id="divVolumen">
                                     <label for="volumen">Volumen negocio: </label>
-                                    <input type="text" name="volumen" id="volumen">
+                                    <input type="text" name="volumen" id="volumen" value="<?php echo (isset($_REQUEST['volumen']) ? $_REQUEST['volumen'] : ''); ?>">
                                     <?php if (!empty($aErrores["volumen"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["volumen"]; ?></p>
                                     <?php } ?>
                                 </div>
                                 <div id="divEnviar">
-                                   <input type="submit" value="Enviar">
+                                   <input type="submit" name="enviar" id="enviar" value="Enviar">
                                 </div>                                
                             </form>
                         <?php
