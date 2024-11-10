@@ -7,7 +7,7 @@
     <body>
         <main>
             <header>
-                <h1>Ejercicio 3</h1>
+                <h1>Ejercicio 6</h1>
             </header>
             <?php
                 /**
@@ -30,11 +30,7 @@
                         'descripcion'=>'',
                         'volumen'=>''                    
                     ]; 
-                    $aRespuestas=[  //Array de respuestas
-                        'codigo' => '',                    
-                        'descripcion'=>'',
-                        'volumen'=>'' 
-                    ];
+                    $aRespuestas=[]; //Array de respuestas
 
                     define('MAX_CADENA', 3);
                     define('MIN_CADENA', 1);
@@ -64,23 +60,17 @@
                     }
 
                     if($entradaOK){
-                        $sCodigo=$_REQUEST['codigo'];                    
-                        $sDescripcion=$_REQUEST['descripcion'];
-                        $fVolumen=$_REQUEST['descripcion'];
-                        $sFecha= date_format(new DateTime("now"), "Y-m-d h:m:s");
-                        $oNull=null;
+
+                        array_push($aRespuestas, $_REQUEST['codigo']);
+                        array_push($aRespuestas, $_REQUEST['descripcion']);
+                        array_push($aRespuestas, $_REQUEST['volumen']);
+                        array_push($aRespuestas, date_format(new DateTime("now"), "Y-m-d h:m:s"));
+                        array_push($aRespuestas, null);
                         
+                        var_dump($aRespuestas);
                         $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
 
-                        $insercion->bindParam(1, $sCodigo);
-                        $insercion->bindParam(2, $sDescripcion);
-                        $insercion->bindParam(3, $oFecha);
-                        $insercion->bindParam(4, $fVolumen);
-                        $insercion->bindParam(5, $oNull);
-
-                        $insercion->execute();
-
-
+                        $insercion->execute($aRespuestas);
                     }                    
 
                         ?>

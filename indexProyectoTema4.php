@@ -54,24 +54,24 @@
                     <tr>
                         <td>4</td>
                         <td>Formulario de búsqueda de departamentos por descripción (por una parte del campo DescDepartamento, si el usuario no pone nada deben aparecer todos los departamentos)</td>
-                        <td><a></a></td>
-                        <td><a></a></td>
+                        <td><a href="codigoPHP/ejercicio04PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio04PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                         <td><a></a></td>
                         <td><a></a></td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td>Pagina web que añade tres registros a nuestra tabla Departamento utilizando tres instrucciones insert y una transacción, de tal forma que se añadan los tres registros o no se añada ninguno</td>
-                        <td><a></a></td>
-                        <td><a></a></td>
+                        <td><a href="codigoPHP/ejercicio05PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio05PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                         <td><a></a></td>
                         <td><a></a></td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td>Pagina web que cargue registros en la tabla Departamento desde un array departamentosnuevos utilizando una consulta preparada</td>
-                        <td><a></a></td>
-                        <td><a></a></td>
+                        <td><a href="codigoPHP/ejercicio06PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio06PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                         <td><a></a></td>
                         <td><a></a></td>
                     </tr>

@@ -67,7 +67,7 @@
                         $sCodigo=$_REQUEST['codigo'];                    
                         $sDescripcion=$_REQUEST['descripcion'];
                         $fVolumen=$_REQUEST['descripcion'];
-                        $sFecha= date_format(new DateTime("now"), "Y-m-d h:m:s");
+                        $sFecha= date_format(new DateTime("now"), "Y-M-D H:M:M");
                         $oNull=null;
                         
                         $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');

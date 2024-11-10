@@ -1,0 +1,132 @@
+/*General*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    height: 100%;
+}
+
+/*Encabezado*/
+
+h1{
+    text-align: center;
+    font-size: 500%;
+    background-color: rgb(216, 199, 224);
+    color: rgb(16, 9, 114);  
+    padding: 2% 1%;                 
+}
+
+/*body*/
+
+#scripts{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#scripts p:nth-of-type(1){
+    margin-left: 30%;
+}
+
+body{                              
+    display: flex;
+    flex-direction: column;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;                
+    height: 100%;        
+}
+
+main{
+    height: 100%;
+}
+
+table{
+    margin: 2% auto;
+}
+
+
+th, td{
+    width: 10%;
+}
+
+table, th, td{    
+    border: 1px solid rgb(16, 9, 114);
+    border-collapse: collapse; 
+    text-align: center;
+}
+
+div{    
+    display: flex;
+    flex-direction: row;
+    margin: 1% 0;
+}
+
+p{
+    width: fit-content;
+    margin-left: 4%;    
+}
+
+label{
+    margin-left: 39%;   
+    width: 9%;
+}
+
+input{
+    margin-left: 3%;
+}
+
+textarea{
+    margin-left: 3%;
+}
+
+#enviar {
+  background-image: linear-gradient(-180deg, #00D775, #00BD68);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: white;
+  display: inline-block;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;  
+  user-select: none;  
+  vertical-align: top;
+  white-space: nowrap;
+  width: 7%;
+  border: 0;
+  margin: 0 auto;
+}
+
+#enviar:hover {
+  background: #00bd68;
+}
+/*footer*/
+
+footer{
+    display: flex;
+    flex-direction: row;                 
+    justify-content: center;
+    background-color: rgb(216, 199, 224);    
+    font-size: 140%;  
+    
+}
+a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    color: rgb(16, 9, 114);
+    font-weight: bold;
+}
+footer p{
+    text-align: center;                
+    width: fit-content;   
+    margin: 2% 1.5%;                          
+}
+p:hover{
+    transform: scale(1.3);                
+}
