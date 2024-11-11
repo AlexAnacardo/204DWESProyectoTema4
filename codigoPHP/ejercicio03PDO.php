@@ -66,7 +66,7 @@
                     if($entradaOK){
                         $sCodigo=$_REQUEST['codigo'];                    
                         $sDescripcion=$_REQUEST['descripcion'];
-                        $fVolumen=$_REQUEST['descripcion'];
+                        $fVolumen=$_REQUEST['volumen'];
                         $sFecha= date_format(new DateTime("now"), "Y-m-d h:m:s");
                         $oNull=null;
                         
@@ -151,7 +151,7 @@
                     ?>
                     </table> 
                 <?php
-                }catch (Exception $ex) {
+                }catch (PDOException $ex) {
                     //Si se produce algun error, este se capturara aqui y se mostrara su codigo y mensaje
                     echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
                     echo("<b>Codigo de error:</b> ".$ex->getCode());

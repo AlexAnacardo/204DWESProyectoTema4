@@ -2,12 +2,12 @@
 <html lang="es">
     <head>
         <title>Ej 03</title>        
-        <link rel="stylesheet" href="../webroot/css/ejercicio03PDO.css">            
+        <link rel="stylesheet" href="../webroot/css/ejercicio05PDO.css">            
     </head>
     <body>
         <main>
             <header>
-                <h1>Ejercicio 3</h1>
+                <h1>Introducir departamentos con transaction</h1>
             </header>
             <?php
                 /**
@@ -18,99 +18,41 @@
                  //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
                 try{                                    
                     require_once('../config/confDBPDO.php');
-
+                    //NO LE PIDE NADA AL USUARIO, TODO LO HACE EL PROGRAMADOR
                     //Establecemos la conexion
                     $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA);   
                     //importamos la libreria de vaidaciones
                     require_once('../core/231018libreriaValidacion.php');
-                    $entradaOK=true; //Booleano que confirma que todo va bien               
+                    $entradaOK=true;
 
-                    $aErrores=[  //Array de errores
-                        'codigo' => '',                    
-                        'descripcion'=>'',
-                        'volumen'=>''                    
-                    ]; 
-                    $aRespuestas=[  //Array de respuestas
-                        'codigo' => '',                    
-                        'descripcion'=>'',
-                        'volumen'=>'' 
-                    ];
-
-                    define('MAX_CADENA', 3);
-                    define('MIN_CADENA', 1);
-                    define('MIN_VOLUMEN', 0);
-                    define('MIN_FLOAT', 0);
-                    define('OBLIGATORIO', 1);
 
                     if(isset($_REQUEST['enviar'])){
                         
-                            $aErrores=[                            
-                                'codigo' => validacionFormularios::comprobarAlfabetico($_REQUEST['codigo'], MAX_CADENA, MIN_CADENA, OBLIGATORIO),                                                       
-                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], 1000, MIN_CADENA, OBLIGATORIO),                                
-                                'volumen'=> validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, MIN_FLOAT, OBLIGATORIO),                            
-                            ];   
-                        
-                        //Recorremos el array de errores 
-                        foreach ($aErrores as $clave => $valor) {
-                            if ($valor == !null) {
-                                $entradaOK = false;
-                                //Limpiamos el campo si hay un error
-                                $_REQUEST[$clave] = ''; 
-                            }
-                        }
                     }
                     else{
                         $entradaOK=false;
                     }
 
-                    if($entradaOK){
-                        $sCodigo=$_REQUEST['codigo'];                    
-                        $sDescripcion=$_REQUEST['descripcion'];
-                        $fVolumen=$_REQUEST['descripcion'];
-                        $sFecha= date_format(new DateTime("now"), "Y-M-D H:M:M");
-                        $oNull=null;
-                        
-                        $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
+                    if($entradaOK){                                                                        
+                        try{
+                            $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
 
-                        $insercion->bindParam(1, $sCodigo);
-                        $insercion->bindParam(2, $sDescripcion);
-                        $insercion->bindParam(3, $oFecha);
-                        $insercion->bindParam(4, $fVolumen);
-                        $insercion->bindParam(5, $oNull);
+                            $insercion->bindParam(1, $sCodigo);
+                            $insercion->bindParam(2, $sDescripcion);
+                            $insercion->bindParam(3, $oFecha);
+                            $insercion->bindParam(4, $fVolumen);
+                            $insercion->bindParam(5, $oNull);
 
-                        $insercion->execute();
+                            $insercion->execute();
+                        } catch (PDOException $ex) {
 
-
+                        }                       
                     }                    
 
                         ?>
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                  
-                                <div id="divCodigo">
-                                    <label for="codigo">Codigo departamento: </label>
-                                    <input type="text" name="codigo" id="codigo" value="<?php echo (isset($_REQUEST['codigo']) ? $_REQUEST['codigo'] : ''); ?>">
-                                    <?php if (!empty($aErrores["codigo"])) { ?>
-                                        <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
-                                        <p style="color: red"><?php echo $aErrores["codigo"]; ?></p>
-                                    <?php } ?>
-                                </div>
-                                <div id="divDescripcion">
-                                    <label for="descripcion">Descripcion: </label>
-                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none"></textarea>
-                                    <?php if (!empty($aErrores["descripcion"])) { ?>
-                                        <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
-                                        <p style="color: red"><?php echo $aErrores["descripcion"]; ?></p>
-                                    <?php } ?>
-                                </div>
-                                <div id="divVolumen">
-                                    <label for="volumen">Volumen negocio: </label>
-                                    <input type="text" name="volumen" id="volumen" value="<?php echo (isset($_REQUEST['volumen']) ? $_REQUEST['volumen'] : ''); ?>">
-                                    <?php if (!empty($aErrores["volumen"])) { ?>
-                                        <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
-                                        <p style="color: red"><?php echo $aErrores["volumen"]; ?></p>
-                                    <?php } ?>
-                                </div>
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                                                  
                                 <div id="divEnviar">
-                                   <input type="submit" name="enviar" id="enviar" value="Enviar">
+                                   <input type="submit" name="enviar" id="enviar" value="Ejecutar transaccion">
                                 </div>                                
                             </form>
                         <?php
@@ -151,7 +93,7 @@
                     ?>
                     </table> 
                 <?php
-                }catch (Exception $ex) {
+                }catch (PDOException $ex) {
                     //Si se produce algun error, este se capturara aqui y se mostrara su codigo y mensaje
                     echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
                     echo("<b>Codigo de error:</b> ".$ex->getCode());

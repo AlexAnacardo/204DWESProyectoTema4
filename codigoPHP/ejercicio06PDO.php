@@ -7,7 +7,7 @@
     <body>
         <main>
             <header>
-                <h1>Ejercicio 6</h1>
+                <h1>Insertar departamento (array)</h1>
             </header>
             <?php
                 /**
@@ -63,11 +63,10 @@
 
                         array_push($aRespuestas, $_REQUEST['codigo']);
                         array_push($aRespuestas, $_REQUEST['descripcion']);
-                        array_push($aRespuestas, $_REQUEST['volumen']);
                         array_push($aRespuestas, date_format(new DateTime("now"), "Y-m-d h:m:s"));
+                        array_push($aRespuestas, $_REQUEST['volumen']);                        
                         array_push($aRespuestas, null);
-                        
-                        var_dump($aRespuestas);
+                                                
                         $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
 
                         $insercion->execute($aRespuestas);
@@ -141,7 +140,7 @@
                     ?>
                     </table> 
                 <?php
-                }catch (Exception $ex) {
+                }catch (PDOException $ex) {
                     //Si se produce algun error, este se capturara aqui y se mostrara su codigo y mensaje
                     echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
                     echo("<b>Codigo de error:</b> ".$ex->getCode());

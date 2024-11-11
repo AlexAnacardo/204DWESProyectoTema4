@@ -7,7 +7,7 @@
     <body>
         <main>
             <header>
-                <h1>Ejercicio 3</h1>
+                <h1>Buscar departamento</h1>
             </header>
             <?php
                 /**
@@ -110,7 +110,7 @@
                     ?>
                     </table> 
                 <?php
-                }catch (Exception $ex) {
+                }catch (PDOException $ex) {
                     //Si se produce algun error, este se capturara aqui y se mostrara su codigo y mensaje
                     echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
                     echo("<b>Codigo de error:</b> ".$ex->getCode());

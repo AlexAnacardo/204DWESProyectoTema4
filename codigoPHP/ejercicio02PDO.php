@@ -7,7 +7,7 @@
     <body>
         <main>
             <header>
-                <h1>Ejercicio 2</h1>
+                <h1>Mostrar tablas</h1>
             </header>
             <?php
             
