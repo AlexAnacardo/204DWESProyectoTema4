@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Ej 03</title>        
+        <title>Ej 05</title>        
         <link rel="stylesheet" href="../webroot/css/ejercicio05PDO.css">            
     </head>
     <body>
@@ -19,8 +19,7 @@
                 try{                                    
                     require_once('../config/confDBPDO.php');
                     //NO LE PIDE NADA AL USUARIO, TODO LO HACE EL PROGRAMADOR
-                    //Establecemos la conexion
-                    $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA);   
+                       
                     //importamos la libreria de vaidaciones
                     require_once('../core/231018libreriaValidacion.php');
                     $entradaOK=true;
@@ -35,18 +34,36 @@
 
                     if($entradaOK){                                                                        
                         try{
-                            $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
-
-                            $insercion->bindParam(1, $sCodigo);
-                            $insercion->bindParam(2, $sDescripcion);
-                            $insercion->bindParam(3, $oFecha);
-                            $insercion->bindParam(4, $fVolumen);
-                            $insercion->bindParam(5, $oNull);
-
-                            $insercion->execute();
+                            
+                            //Establecemos la conexion
+                            $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA);
+                            $aDepartamentosNuevos=[
+                                ['AAA', 'descripcion 1', date_format(new DateTime("now"), "Y-m-d h:m:s"), 100.34, null],
+                                ['BBB', 'descripcion 2', date_format(new DateTime("now"), "Y-m-d h:m:s"), 200.56, null],
+                                ['CCC', 'descripcion 3', date_format(new DateTime("now"), "Y-m-d h:m:s"), 300.83, null]
+                            ];
+                            
+                            $miDB->beginTransaction();
+                            /*
+                            $miDB->exec("insert into T02_Departamento values('AAA', 'descripcion 1', 'now()', 100.34, null)");
+                            $miDB->exec("insert into T02_Departamento values('BBB', 'descripcion 2', 'now()', 200.56, null)");
+                            $miDB->exec("insert into T02_Departamento values('CCC', 'descripcion 3', 'now()', 300.83, null)");
+                            */
+                            for($i=0; $i<count($aDepartamentosNuevos); $i++){
+                                $consulta=$miDB->prepare("insert into T02_Departamento values(?,?,?,?,?)");
+                                $consulta->execute($aDepartamentosNuevos[$i]);
+                            }                                                        
+                            
+                            $miDB->commit();
+                            
                         } catch (PDOException $ex) {
-
-                        }                       
+                            $miDB->rollBack();
+                            
+                            echo("Fallo: ".$ex->getMessage());
+                        }
+                        finally{
+                            unset($miDB);
+                        }
                     }                    
 
                         ?>
@@ -57,7 +74,8 @@
                             </form>
                         <?php
 
-
+                    //Establecemos la conexion
+                    $miDB=new PDO(CONEXION, USUARIO, CONTRASEÑA);
                     //Lanzamos un query de consulta y lo guardamos en una variable
                     $resultadoConsulta= $miDB->query('select * from T02_Departamento');                                               
 
@@ -80,11 +98,12 @@
                         <tr>
                             <?php
                             $oFechaBaja=$oDepartamento->T02_FechaBajaDepartamento;
-                        
+                            $sVolumen=strval($oDepartamento->T02_VolumenDeNegocio);
+                            
                             echo "<td>".$oDepartamento->T02_CodDepartamento."</td>";
                             echo "<td>".$oDepartamento->T02_DescDepartamento."</td>";
                             echo "<td>".date_format(new DateTime($oDepartamento->T02_FechaCreacionDepartamento), "d/m/Y")."</td>";
-                            echo "<td>".$oDepartamento->T02_VolumenDeNegocio."</td>";
+                            echo "<td>".str_replace(".", ",", $sVolumen)."€</td>";
                             echo is_null($oFechaBaja) ? '<td></td>' : "<td>".date_format(new DateTime($oFechaBaja), "d/m/Y")."</td>";                            
                             ?>
                         </tr>

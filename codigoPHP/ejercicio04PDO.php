@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Ej 03</title>        
+        <title>Ej 04</title>        
         <link rel="stylesheet" href="../webroot/css/ejercicio04PDO.css">            
     </head>
     <body>
@@ -59,7 +59,7 @@
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                                                  
                                 <div id="divDescripcion">
                                     <label for="descripcion">Descripcion: </label>
-                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none"></textarea>
+                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none"><?php echo (isset($_REQUEST['descripcion']) ? $_REQUEST['descripcion'] : ''); ?></textarea>
                                     <?php if (!empty($aErrores["descripcion"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["descripcion"]; ?></p>
@@ -97,11 +97,12 @@
                         <tr>
                             <?php
                             $oFechaBaja=$oDepartamento->T02_FechaBajaDepartamento;
-                        
+                            $sVolumen=strval($oDepartamento->T02_VolumenDeNegocio);
+                            
                             echo "<td>".$oDepartamento->T02_CodDepartamento."</td>";
                             echo "<td>".$oDepartamento->T02_DescDepartamento."</td>";
                             echo "<td>".date_format(new DateTime($oDepartamento->T02_FechaCreacionDepartamento), "d/m/Y")."</td>";
-                            echo "<td>".$oDepartamento->T02_VolumenDeNegocio."</td>";
+                            echo "<td>".str_replace(".", ",", $sVolumen)."€</td>";
                             echo is_null($oFechaBaja) ? '<td></td>' : "<td>".date_format(new DateTime($oFechaBaja), "d/m/Y")."</td>";                            
                             ?>
                         </tr>

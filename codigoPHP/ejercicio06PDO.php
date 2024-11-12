@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Ej 03</title>        
+        <title>Ej 06</title>        
         <link rel="stylesheet" href="../webroot/css/ejercicio03PDO.css">            
     </head>
     <body>
@@ -76,7 +76,7 @@
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                  
                                 <div id="divCodigo">
                                     <label for="codigo">Codigo departamento: </label>
-                                    <input type="text" name="codigo" id="codigo" value="<?php echo (isset($_REQUEST['codigo']) ? $_REQUEST['codigo'] : ''); ?>">
+                                    <input type="text" name="codigo" id="codigo" style="background-color: #ffffb3" value="<?php echo (isset($_REQUEST['codigo']) ? $_REQUEST['codigo'] : ''); ?>">
                                     <?php if (!empty($aErrores["codigo"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["codigo"]; ?></p>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div id="divDescripcion">
                                     <label for="descripcion">Descripcion: </label>
-                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none"></textarea>
+                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none; background-color: #ffffb3"></textarea>
                                     <?php if (!empty($aErrores["descripcion"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["descripcion"]; ?></p>
@@ -92,7 +92,7 @@
                                 </div>
                                 <div id="divVolumen">
                                     <label for="volumen">Volumen negocio: </label>
-                                    <input type="text" name="volumen" id="volumen" value="<?php echo (isset($_REQUEST['volumen']) ? $_REQUEST['volumen'] : ''); ?>">
+                                    <input type="text" name="volumen" id="volumen" style="background-color: #ffffb3" value="<?php echo (isset($_REQUEST['volumen']) ? $_REQUEST['volumen'] : ''); ?>">
                                     <?php if (!empty($aErrores["volumen"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["volumen"]; ?></p>
@@ -127,11 +127,12 @@
                         <tr>
                             <?php
                             $oFechaBaja=$oDepartamento->T02_FechaBajaDepartamento;
-                        
+                            $sVolumen=strval($oDepartamento->T02_VolumenDeNegocio);
+                            
                             echo "<td>".$oDepartamento->T02_CodDepartamento."</td>";
                             echo "<td>".$oDepartamento->T02_DescDepartamento."</td>";
                             echo "<td>".date_format(new DateTime($oDepartamento->T02_FechaCreacionDepartamento), "d/m/Y")."</td>";
-                            echo "<td>".$oDepartamento->T02_VolumenDeNegocio."</td>";
+                            echo "<td>".str_replace(".", ",", $sVolumen)."€</td>";
                             echo is_null($oFechaBaja) ? '<td></td>' : "<td>".date_format(new DateTime($oFechaBaja), "d/m/Y")."</td>";                            
                             ?>
                         </tr>

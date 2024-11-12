@@ -44,10 +44,12 @@
                         
                         $oFechaBaja=$oDepartamento->T02_FechaBajaDepartamento;
                         
+                        $sVolumen=strval($oDepartamento->T02_VolumenDeNegocio);
+                        
                         echo "<td>".$oDepartamento->T02_CodDepartamento."</td>";
                         echo "<td>".$oDepartamento->T02_DescDepartamento."</td>";
                         echo "<td>".date_format(new DateTime($oDepartamento->T02_FechaCreacionDepartamento), "d/m/Y")."</td>";
-                        echo "<td>".$oDepartamento->T02_VolumenDeNegocio."</td>";
+                        echo "<td>".str_replace(".", ",", $sVolumen)."€</td>";                        
                         echo is_null($oFechaBaja) ? '<td></td>' : "<td>".date_format(new DateTime($oFechaBaja), "d/m/Y")."</td>";
                         ?>
                     </tr>
