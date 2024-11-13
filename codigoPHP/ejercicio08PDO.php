@@ -36,7 +36,7 @@ file_get_contents($filename)
                     
                     $resultados=$consulta->fetchAll(PDO::FETCH_ASSOC);
                                                             
-                    file_put_contents('departamentos.json', json_encode($resultados));   
+                    file_put_contents('../tmp/departamentos.json', json_encode($resultados));   
                     
                      
                 }catch (PDOException $ex) {
