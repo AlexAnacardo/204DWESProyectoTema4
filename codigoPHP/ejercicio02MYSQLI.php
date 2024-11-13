@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Ej 01</title>
-        <link rel="stylesheet" href="../webroot/css/ejercicio21.css">
+        <title>Ej 02</title>
+        <link rel="stylesheet" href="../webroot/css/ejercicio02MYSQLI.css">
     </head>
     <body>
         <main>
@@ -16,6 +16,37 @@
                 
                 $resultadoConsulta= $miDB->query('select * from T02_Departamento');
                 
+                ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Descripcion</th>
+                            <th>Alta departamento</th>
+                            <th>Volumen negocio</th>
+                            <th>Baja departamento</th>
+                        </tr>
+                    </thead>
+                <?php
+                    while ($oDepartamento=$resultadoConsulta->fetch_object()){
+                        ?>
+                        <tr>
+                            <?php                        
+
+                            $oFechaBaja=$oDepartamento->T02_FechaBajaDepartamento;
+
+                            $sVolumen=strval($oDepartamento->T02_VolumenDeNegocio);
+
+                            echo "<td>".$oDepartamento->T02_CodDepartamento."</td>";
+                            echo "<td>".$oDepartamento->T02_DescDepartamento."</td>";
+                            echo "<td>".date_format(new DateTime($oDepartamento->T02_FechaCreacionDepartamento), "d/m/Y")."</td>";
+                            echo "<td>".str_replace(".", ",", $sVolumen)."€</td>";                        
+                            echo is_null($oFechaBaja) ? '<td></td>' : "<td>".date_format(new DateTime($oFechaBaja), "d/m/Y")."</td>";
+                            ?>
+                        </tr>
+                        <?php                                        
+                    }
+                    /*
                 $registroArray=$resultadoConsulta->fetch_array();
                 while(!empty($registroArray)){
                     echo($registroArray['T02_CodDepartamento'].", ");
@@ -26,7 +57,7 @@
                 
                     $registroArray=$resultadoConsulta->fetch_array();
                 }
-                
+                */
                 
                     
                 $miDB->close();

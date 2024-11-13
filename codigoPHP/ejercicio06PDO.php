@@ -14,9 +14,9 @@
                  * @author Alex Asensio Sanchez
                  * @version Fecha de última modificación 06/11/2024
                  */
-                 
-                 //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
-                try{                                    
+                                  
+                try{            
+                    //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
                     require_once('../config/confDBPDO.php');
 
                     //Establecemos la conexion
@@ -121,7 +121,7 @@
                         </thead>
                     <?php
 
-                    //Asignamos a la variable oResultado el 1er objeto de las respuestas recibidas del query, mientras el objeto contenga valores, se ejecutara el bucle                
+                    //Asignamos a la variable oDepartamento el 1er objeto de las respuestas recibidas del query, mientras el objeto contenga valores, se ejecutara el bucle                
                     while ($oDepartamento=$resultadoConsulta->fetchObject()){
                         ?>
                         <tr>

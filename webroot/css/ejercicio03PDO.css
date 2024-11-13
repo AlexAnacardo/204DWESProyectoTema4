@@ -50,10 +50,19 @@ th, td{
     width: 10%;
 }
 
+
 table, th, td{    
     border: 1px solid rgb(16, 9, 114);
     border-collapse: collapse; 
     text-align: center;
+}
+
+td:nth-of-type(2){
+    text-align: left;
+}
+
+td:nth-of-type(4){
+    text-align: right;
 }
 
 div{    

@@ -86,8 +86,8 @@
                     <tr>
                         <td>8</td>
                         <td>Página web que toma datos (código y descripción) de la tabla Departamento y guarda en un fichero departamento.xml. (COPIA DE SEGURIDAD / EXPORTAR). El fichero exportado se encuentra en el directorio .../tmp/ del servidor</td>
-                        <td><a></a></td>
-                        <td><a></a></td>
+                        <td><a href="codigoPHP/ejercicio08PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
+                        <td><a href="mostrarcodigo/muestraEjercicio08PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                         <td><a></a></td>
                         <td><a></a></td>
                     </tr>
