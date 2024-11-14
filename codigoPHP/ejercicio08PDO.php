@@ -34,11 +34,12 @@ file_get_contents($filename)
                     //Lanzamos un query de consulta y lo guardamos en una variable
                     $consulta= $miDB->query('select * from T02_Departamento');  
                     
-                    $resultados=$consulta->fetchAll(PDO::FETCH_ASSOC);
-                                                            
-                    file_put_contents('../tmp/departamentos.json', json_encode($resultados));   
+                    $departamentos=$consulta->fetchAll(PDO::FETCH_ASSOC);
+                    $fechaActual=date_format(new DateTime("now"), "Y-m-d");
+                    file_put_contents("../tmp/".$fechaActual."departamentos.json", json_encode($departamentos));   
                     
-                     
+                    echo "<p class='mensaje-exito'>Los datos se han exportado correctamente a <a href='../tmp/{$fechaActual}departamentos.json'>{$fechaActual}departamentos.json</a>.</p>";
+                    
                 }catch (PDOException $ex) {
                     //Si se produce algun error, este se capturara aqui y se mostrara su codigo y mensaje
                     echo("<b>Mensaje de error:</b> ".$ex->getMessage()."<br>");
