@@ -21,15 +21,13 @@ h1{
 /*body*/
 
 #scripts{
-    width: 57%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
 }
 
-
-#scripts p{
-    margin-left: 4%;    
+#scripts p:nth-of-type(1){
+    margin-left: 30%;
 }
 
 body{                              
@@ -38,53 +36,81 @@ body{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;                
     height: 100%;        
 }
+
 main{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1% auto;    
-   
-    height: 110%;      
-    align-items: center;    
-    border-radius: 9%;
-    padding: 3%;
+    height: 100%;
 }
 
 table{
-    width: 100%;
+    margin: 2% auto;
 }
+
+td:nth-of-type(2){
+    text-align: left;
+}
+
+td:nth-of-type(4){
+    text-align: right;
+}
+
+th, td{
+    width: 10%;
+}
+
 table, th, td{    
-    border: 0.15em solid rgb(16, 9, 114);
+    border: 1px solid rgb(16, 9, 114);
     border-collapse: collapse; 
     text-align: center;
 }
 
-td {
-    width: 10%;
-    padding: 0.3%;
+div{    
+    display: flex;
+    flex-direction: row;
+    margin: 1% 0;
 }
 
-td:nth-child(1) {
-    width: 3%;
+p{
+    width: fit-content;
+    margin-left: 4%;    
 }
 
-td:nth-child(2) {
-    width: 60%;
+label{
+    margin-left: 39%;   
+    width: 9%;
 }
 
-td:nth-child(3) {
-    width: 4%;
+input{
+    margin-left: 3%;
 }
 
-td:nth-child(4) {
-    width: 4%;
+textarea{
+    margin-left: 3%;
 }
 
-td:nth-child(5) {
-    width: 4%;
+#enviar {
+  background-image: linear-gradient(-180deg, #00D775, #00BD68);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: white;
+  display: inline-block;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;  
+  user-select: none;  
+  vertical-align: top;
+  white-space: nowrap;
+  width: 7%;
+  border: 0;
+  margin: 0 auto;
 }
 
-td:nth-child(6) {
-    width: 4%;
+#enviar:hover {
+  background: #00bd68;
 }
 /*footer*/
 

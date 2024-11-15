@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Ej 03</title>        
+        <title>Ej 06</title>        
         <link rel="stylesheet" href="../webroot/css/ejercicio03PDO.css">            
     </head>
     <body>
         <main>
             <header>
-                <h1>Ejercicio 3</h1>
+                <h1>Insertar departamento (array)</h1>
             </header>
             <?php
                 /**
                  * @author Alex Asensio Sanchez
                  * @version Fecha de última modificación 06/11/2024
                  */
-                 
-                 //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
-                try{  
-                    define('MAX_CADENA', 3);
-                    define('MIN_CADENA', 1);
-                    define('MIN_VOLUMEN', 0);
-                    define('MIN_FLOAT', 0);
-                    define('OBLIGATORIO', 1);
-                    
+                                  
+                try{            
+                    //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
                     require_once('../config/confDBPDO.php');
 
                     //Establecemos la conexion
@@ -36,20 +30,20 @@
                         'descripcion'=>'',
                         'volumen'=>''                    
                     ]; 
-                    $aRespuestas=[  //Array de respuestas
-                        'codigo' => '',                    
-                        'descripcion'=>'',
-                        'volumen'=>'' 
-                    ];
+                    $aRespuestas=[]; //Array de respuestas
 
-                    
+                    define('MAX_CADENA', 3);
+                    define('MIN_CADENA', 1);
+                    define('MIN_VOLUMEN', 0);
+                    define('MIN_FLOAT', 0);
+                    define('OBLIGATORIO', 1);
 
                     if(isset($_REQUEST['enviar'])){
                         
                             $aErrores=[                            
                                 'codigo' => validacionFormularios::comprobarAlfabetico($_REQUEST['codigo'], MAX_CADENA, MIN_CADENA, OBLIGATORIO),                                                       
                                 'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], 1000, MIN_CADENA, OBLIGATORIO),                                
-                                'volumen'=> validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, MIN_FLOAT, OBLIGATORIO),                                   
+                                'volumen'=> validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, MIN_FLOAT, OBLIGATORIO),                            
                             ];   
                         
                         //Recorremos el array de errores 
@@ -65,22 +59,17 @@
                         $entradaOK=false;
                     }
 
-                    if($entradaOK){                                                
-                        
-                        $aRespuestas['codigo']=$_REQUEST['codigo'];                    
-                        $aRespuestas['descripcion']=$_REQUEST['descripcion'];
-                        $aRespuestas['volumen']=$_REQUEST['volumen'];                                                
-                        
-                        $insercion= $miDB->prepare("insert into T02_Departamento values(:codigo,:descripcion, now(),:volumen, null)");
+                    if($entradaOK){
 
-                        $insercion->bindParam(':codigo', $aRespuestas['codigo']);
-                        $insercion->bindParam(':descripcion', $aRespuestas['descripcion']);
-                        $insercion->bindParam(':volumen', $aRespuestas['volumen']);
-                        
+                        array_push($aRespuestas, $_REQUEST['codigo']);
+                        array_push($aRespuestas, $_REQUEST['descripcion']);
+                        array_push($aRespuestas, date_format(new DateTime("now"), "Y-m-d h:m:s"));
+                        array_push($aRespuestas, $_REQUEST['volumen']);                        
+                        array_push($aRespuestas, null);
+                                                
+                        $insercion= $miDB->prepare('insert into T02_Departamento values(?,?,?,?,?)');
 
-                        $insercion->execute();
-                        
-                        unset($_REQUEST);                        
+                        $insercion->execute($aRespuestas);
                     }                    
 
                         ?>
@@ -132,7 +121,7 @@
                         </thead>
                     <?php
 
-                    //Asignamos a la variable oResultado el 1er objeto de las respuestas recibidas del query, mientras el objeto contenga valores, se ejecutara el bucle                
+                    //Asignamos a la variable oDepartamento el 1er objeto de las respuestas recibidas del query, mientras el objeto contenga valores, se ejecutara el bucle                
                     while ($oDepartamento=$resultadoConsulta->fetchObject()){
                         ?>
                         <tr>

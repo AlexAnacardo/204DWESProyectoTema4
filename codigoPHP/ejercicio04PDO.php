@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Ej 03</title>        
-        <link rel="stylesheet" href="../webroot/css/ejercicio03PDO.css">            
+        <title>Ej 04</title>        
+        <link rel="stylesheet" href="../webroot/css/ejercicio04PDO.css">            
     </head>
     <body>
         <main>
             <header>
-                <h1>Ejercicio 3</h1>
+                <h1>Buscar departamento</h1>
             </header>
             <?php
                 /**
@@ -16,13 +16,7 @@
                  */
                  
                  //Importamos el fichero de variables con las constantes que pertenecen a nuestra conexion
-                try{  
-                    define('MAX_CADENA', 3);
-                    define('MIN_CADENA', 1);
-                    define('MIN_VOLUMEN', 0);
-                    define('MIN_FLOAT', 0);
-                    define('OBLIGATORIO', 1);
-                    
+                try{                                    
                     require_once('../config/confDBPDO.php');
 
                     //Establecemos la conexion
@@ -31,25 +25,20 @@
                     require_once('../core/231018libreriaValidacion.php');
                     $entradaOK=true; //Booleano que confirma que todo va bien               
 
-                    $aErrores=[  //Array de errores
-                        'codigo' => '',                    
-                        'descripcion'=>'',
-                        'volumen'=>''                    
+                    $aErrores=[  //Array de errores                                            
+                        'descripcion'=>''                        
                     ]; 
-                    $aRespuestas=[  //Array de respuestas
-                        'codigo' => '',                    
-                        'descripcion'=>'',
-                        'volumen'=>'' 
+                    $aRespuestas=[  //Array de respuestas                                       
+                        'descripcion'=>'',                        
                     ];
 
-                    
+                    define('MAX_CADENA', 10000);
+                    define('MIN_CADENA', 0);
+                    define('OPCIONAL', 0);
 
-                    if(isset($_REQUEST['enviar'])){
-                        
-                            $aErrores=[                            
-                                'codigo' => validacionFormularios::comprobarAlfabetico($_REQUEST['codigo'], MAX_CADENA, MIN_CADENA, OBLIGATORIO),                                                       
-                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], 1000, MIN_CADENA, OBLIGATORIO),                                
-                                'volumen'=> validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, MIN_FLOAT, OBLIGATORIO),                                   
+                    if(isset($_REQUEST['enviar'])){                        
+                            $aErrores=[                                                                          
+                                'descripcion'=> validacionFormularios::comprobarAlfabetico($_REQUEST['descripcion'], MAX_CADENA, MIN_CADENA, OPCIONAL),                                                                                           
                             ];   
                         
                         //Recorremos el array de errores 
@@ -64,62 +53,22 @@
                     else{
                         $entradaOK=false;
                     }
-
-                    if($entradaOK){                                                
-                        
-                        $aRespuestas['codigo']=$_REQUEST['codigo'];                    
-                        $aRespuestas['descripcion']=$_REQUEST['descripcion'];
-                        $aRespuestas['volumen']=$_REQUEST['volumen'];                                                
-                        
-                        $insercion= $miDB->prepare("insert into T02_Departamento values(:codigo,:descripcion, now(),:volumen, null)");
-
-                        $insercion->bindParam(':codigo', $aRespuestas['codigo']);
-                        $insercion->bindParam(':descripcion', $aRespuestas['descripcion']);
-                        $insercion->bindParam(':volumen', $aRespuestas['volumen']);
-                        
-
-                        $insercion->execute();
-                        
-                        unset($_REQUEST);                        
-                    }                    
+                
 
                         ?>
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                  
-                                <div id="divCodigo">
-                                    <label for="codigo">Codigo departamento: </label>
-                                    <input type="text" name="codigo" id="codigo" style="background-color: #ffffb3" value="<?php echo (isset($_REQUEST['codigo']) ? $_REQUEST['codigo'] : ''); ?>">
-                                    <?php if (!empty($aErrores["codigo"])) { ?>
-                                        <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
-                                        <p style="color: red"><?php echo $aErrores["codigo"]; ?></p>
-                                    <?php } ?>
-                                </div>
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" novalidate>                                                                                                  
                                 <div id="divDescripcion">
                                     <label for="descripcion">Descripcion: </label>
-                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none; background-color: #ffffb3"></textarea>
+                                    <textarea name="descripcion" id="descripcion" rows="2" cols="50" style="resize: none"><?php echo (isset($_REQUEST['descripcion']) ? $_REQUEST['descripcion'] : ''); ?></textarea>
                                     <?php if (!empty($aErrores["descripcion"])) { ?>
                                         <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
                                         <p style="color: red"><?php echo $aErrores["descripcion"]; ?></p>
                                     <?php } ?>
-                                </div>
-                                <div id="divVolumen">
-                                    <label for="volumen">Volumen negocio: </label>
-                                    <input type="text" name="volumen" id="volumen" style="background-color: #ffffb3" value="<?php echo (isset($_REQUEST['volumen']) ? $_REQUEST['volumen'] : ''); ?>">
-                                    <?php if (!empty($aErrores["volumen"])) { ?>
-                                        <!--Si hay algun error almacenado en el array, el mensaje del mismo se mostrara, esto para cada caso-->
-                                        <p style="color: red"><?php echo $aErrores["volumen"]; ?></p>
-                                    <?php } ?>
-                                </div>
+                                </div>                                
                                 <div id="divEnviar">
                                    <input type="submit" name="enviar" id="enviar" value="Enviar">
                                 </div>                                
                             </form>
-                        <?php
-
-
-                    //Lanzamos un query de consulta y lo guardamos en una variable
-                    $resultadoConsulta= $miDB->query('select * from T02_Departamento');                                               
-
-                    ?>
                     <table>
                         <thead>
                             <tr>
@@ -131,7 +80,17 @@
                             </tr>
                         </thead>
                     <?php
-
+                    
+                    //Lanzamos un query de consulta y lo guardamos en una variable                    
+                    if(isset($_REQUEST['descripcion']) and $_REQUEST['descripcion']!=''){                   
+                        $resultadoConsulta = $miDB->prepare("select * from T02_Departamento where T02_DescDepartamento=?");
+                        $resultadoConsulta->execute([$_REQUEST['descripcion']]);                         
+                    }
+                    else{
+                        $resultadoConsulta= $miDB->query('select * from T02_Departamento');
+                    }
+                    
+                        
                     //Asignamos a la variable oResultado el 1er objeto de las respuestas recibidas del query, mientras el objeto contenga valores, se ejecutara el bucle                
                     while ($oDepartamento=$resultadoConsulta->fetchObject()){
                         ?>
