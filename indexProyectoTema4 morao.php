@@ -77,7 +77,7 @@
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td>Página web que toma datos de un fichero json y los añade a la tabla Departamento de nuestra base de datos. (IMPORTAR). El fichero importado se encuentra en el directorio .../tmp/ del servidor</td>
+                        <td>Página web que toma datos de un fichero xml y los añade a la tabla Departamento de nuestra base de datos. (IMPORTAR). El fichero importado se encuentra en el directorio .../tmp/ del servidor</td>
                         <td><a href="codigoPHP/ejercicio07PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
                         <td><a href="mostrarcodigo/muestraEjercicio07PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                         <td><a></a></td>
@@ -85,7 +85,7 @@
                     </tr>
                     <tr>
                         <td>8</td>
-                        <td>Página web que toma datos (código y descripción) de la tabla Departamento y guarda en un fichero departamento.json (COPIA DE SEGURIDAD / EXPORTAR). El fichero exportado se encuentra en el directorio .../tmp/ del servidor</td>
+                        <td>Página web que toma datos (código y descripción) de la tabla Departamento y guarda en un fichero departamento.xml. (COPIA DE SEGURIDAD / EXPORTAR). El fichero exportado se encuentra en el directorio .../tmp/ del servidor</td>
                         <td><a href="codigoPHP/ejercicio08PDO.php"><image src="webroot/images/play.png" heigth="25%" width="25%"/></a></td>
                         <td><a href="mostrarcodigo/muestraEjercicio08PDO.php"><image src="webroot/images/ojo.png" heigth="30%" width="30%"/></a></td>
                         <td><a></a></td>
