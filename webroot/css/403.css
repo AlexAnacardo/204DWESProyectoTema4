@@ -1,5 +1,10 @@
-body{
-    background-color: red;
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    height: 100%;
 }
 header h1{
     text-align: center;
@@ -7,4 +12,21 @@ header h1{
     padding: 2% 1%;
     background-color: #131921;
     color: white;
+}
+
+p{
+    text-decoration: none;
+    font-size: 200%;    
+    width: 4.5%;
+    margin: 14% auto;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+     
+}
+a:hover{
+    color: #c97923;
+    text-decoration: underline;
 }
