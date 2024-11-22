@@ -71,12 +71,7 @@
                         $aRespuestas['descripcion']=$_REQUEST['descripcion'];
                         $aRespuestas['volumen']=$_REQUEST['volumen'];                                                
                         
-                        $insercion= $miDB->prepare("insert into T02_Departamento values(:codigo,:descripcion, now(),:volumen, null)");
-
-                        $insercion->bindParam(':codigo', $aRespuestas['codigo']);
-                        $insercion->bindParam(':descripcion', $aRespuestas['descripcion']);
-                        $insercion->bindParam(':volumen', $aRespuestas['volumen']);
-                        
+                        $insercion= $miDB->prepare('insert into T02_Departamento values("'.$aRespuestas['codigo'].'","'.$aRespuestas['descripcion'].'", now(),"'.$aRespuestas['volumen'].'", null)');                                                
 
                         $insercion->execute();
                         
